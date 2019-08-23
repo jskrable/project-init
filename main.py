@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding: utf-8
 """
-main.py
+main.py.
 08-23-19
 jack skrable
 
@@ -12,6 +12,7 @@ import os
 import sys
 import string
 import argparse
+import datetime
 
 
 def arg_parser():
@@ -33,10 +34,29 @@ def arg_parser():
 #####################################################################
 args = arg_parser()
 
-git_ignore = '/home/jskrable/code/project-init/.gitignore'
+source_path = '/'.join(os.path.realpath(__file__).split('/')[:-1])
 project_path = os.path.abspath('./' + args.name)
-dt = datetime.datetime.now()
-date = '-'.join([dt.year,dt.month,dt.day])
+date = datetime.datetime.now().strftime('%Y-%m-%d')
+
+author = input('Author: ')
+title = input('Title: ')
+description = input('Description: ')
+
+# print(source_path)
+# print(project_path)
+# print(date)
+# print(os.path.join(source_path,args.language))
 
 os.system('mkdir ' + project_path)
-os.system(' '.join('cp',git_ignore,project_path+'/.gitignore'))
+os.system(' '.join(['cp', os.path.join(source_path,args.language,'.'), project_path, '-r -a']))
+
+with open(os.path.join(project_path, 'main.py'), 'r+') as f:
+	contents = f.read()
+	contents = contents.replace('[author]', author)
+	contents = contents.replace('[title]', title)
+	contents = contents.replace('[date]', date)
+	contents = contents.replace('[description]', description)
+	f.seek(0)
+	f.write(contents)
+	f.truncate()
+
