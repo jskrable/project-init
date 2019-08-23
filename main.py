@@ -39,13 +39,8 @@ project_path = os.path.abspath('./' + args.name)
 date = datetime.datetime.now().strftime('%Y-%m-%d')
 
 author = input('Author: ')
-title = input('Title: ')
+# title = input('Title: ')
 description = input('Description: ')
-
-# print(source_path)
-# print(project_path)
-# print(date)
-# print(os.path.join(source_path,args.language))
 
 os.system('mkdir ' + project_path)
 os.system(' '.join(['cp', os.path.join(source_path,args.language,'.'), project_path, '-r -a']))
@@ -53,7 +48,7 @@ os.system(' '.join(['cp', os.path.join(source_path,args.language,'.'), project_p
 with open(os.path.join(project_path, 'main.py'), 'r+') as f:
 	contents = f.read()
 	contents = contents.replace('[author]', author)
-	contents = contents.replace('[title]', title)
+	contents = contents.replace('[title]', 'main.py')
 	contents = contents.replace('[date]', date)
 	contents = contents.replace('[description]', description)
 	f.seek(0)
@@ -61,7 +56,7 @@ with open(os.path.join(project_path, 'main.py'), 'r+') as f:
 	f.truncate()
 
 with open(os.path.join(project_path, 'readme.md'), 'a+') as f:
-	contents = '##' + title + '\n'
+	contents = '##' + args.name + '\n'
 	contents += description
 	f.seek(0)
 	f.write(contents)
