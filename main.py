@@ -60,3 +60,11 @@ with open(os.path.join(project_path, 'main.py'), 'r+') as f:
 	f.write(contents)
 	f.truncate()
 
+with open(os.path.join(project_path, 'readme.md'), 'a+') as f:
+	contents = '##' + title + '\n'
+	contents += description
+	f.seek(0)
+	f.write(contents)
+	f.truncate()
+
+# os.chdir(project_path)
