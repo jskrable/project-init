@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 # coding: utf-8
 """
-main.py.
+main.py
 08-23-19
 jack skrable
-
 command line program used to initiate a new python project
 """
 
@@ -56,7 +55,7 @@ with open(os.path.join(project_path, 'main.py'), 'r+') as f:
 	f.truncate()
 
 with open(os.path.join(project_path, 'readme.md'), 'a+') as f:
-	contents = '##' + args.name + '\n'
+	contents = '## ' + args.name + '\n'
 	contents += description
 	f.seek(0)
 	f.write(contents)
